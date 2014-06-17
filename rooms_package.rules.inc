@@ -114,7 +114,7 @@ function rooms_package_check_availability($product) {
 }
 
 /**
- * Assigns a unit to the package when adding it to the cart.
+ * Assigns a bookable unit to the package when adding it to the cart.
  *
  * @param $line_item
  *   The line item to assign the unit.
