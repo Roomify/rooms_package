@@ -55,14 +55,15 @@ function rooms_package_rules_action_info() {
  * @param $product
  *   The Rooms package to check availability
  *
- * @return bool
- *   TRUE if it is available, FALSE otherwise.
+ * @return int|bool
+ *   Available uni id if it is available, FALSE otherwise.
  */
 function rooms_package_check_availability($product) {
-  $unit_id = &drupal_static(__FUNCTION__);
-  if (isset($unit_id)) {
-    return $unit_id;
+  $unit_ids = &drupal_static(__FUNCTION__);
+  if (isset($unit_ids[$product->product_id])) {
+    return $unit_ids[$product->product_id];
   }
+
   $all_units = field_get_items('commerce_product', $product, 'rooms_package_all_units');
   $unit_types = field_get_items('commerce_product', $product, 'rooms_package_unit_types');
   $units = field_get_items('commerce_product', $product, 'rooms_package_units');
@@ -77,6 +78,7 @@ function rooms_package_check_availability($product) {
   if (is_array($available_units)) {
     if (!empty($all_units[0]['value'])) {
       $unit_id = key(current(current($available_units)));
+      $unit_ids[$product->product_id] = $unit_id;
       return $unit_id;
     }
     elseif (is_array($unit_types)) {
@@ -85,6 +87,7 @@ function rooms_package_check_availability($product) {
         foreach ($available_units as $unit_type => $price_units) {
           if ($types[$unit_type]->id == $unit['target_id']) {
             $unit_id = key(reset($available_units[$unit_type]));
+            $unit_ids[$product->product_id] = $unit_id;
             return $unit_id;
           }
         }
@@ -96,6 +99,7 @@ function rooms_package_check_availability($product) {
           foreach ($price_units as $unit_id => $unit_definition) {
             foreach ($units as $unit) {
               if ($unit_id == $unit['target_id']) {
+                $unit_ids[$product->product_id] = $unit_id;
                 return $unit_id;
               }
             }
@@ -105,8 +109,8 @@ function rooms_package_check_availability($product) {
     }
   }
 
-  $unit_id = FALSE;
-  return $unit_id;
+  $unit_ids[$product->product_id] = FALSE;
+  return FALSE;
 }
 
 /**
@@ -130,7 +134,7 @@ function rooms_package_assign_unit_id($line_item) {
     ),
   );
   $line_item->rooms_booked_unit_id[LANGUAGE_NONE][0]['value'] = $unit_id;
-  $line_item->label = t('Booking for package @package start date: @start_date end date: @end_date for unit @unit', array(
+  $line_item->line_item_label = t('Booking for package @package start date: @start_date end date: @end_date for unit @unit', array(
     '@package' => $product->title,
     '@start_date' => $start_date->format('Y-m-d'),
     '@end_date' => $end_date->format('Y-m-d'),

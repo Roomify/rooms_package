@@ -92,6 +92,28 @@ function rooms_package_default_rules_configuration() {
 
   $rules['rules_rooms_package_validate_checkout'] = rules_import($rule_export);
 
+  $rule_export = '{ "rules_rooms_package_clean_cart" : {
+    "LABEL" : "Clean previous cart",
+    "PLUGIN" : "reaction rule",
+    "OWNER" : "rules",
+    "TAGS" : [ "Rooms" ],
+    "REQUIRES" : [ "rules", "commerce_cart" ],
+    "ON" : { "commerce_cart_product_prepare" : [] },
+    "IF" : [
+      { "entity_is_of_bundle" : {
+          "entity" : [ "commerce-product" ],
+          "type" : "commerce_product",
+          "bundle" : { "value" : { "rooms_package" : "rooms_package" } }
+        }
+      }
+    ],
+    "DO" : [
+      { "commerce_cart_empty" : { "commerce_order" : [ "commerce_order" ] } }
+    ]
+  }}';
+
+  $rules['rules_rooms_package_clean_cart'] = rules_import($rule_export);
+
   $rule_export = '{ "rules_rooms_package_assign_unit" : {
     "LABEL" : "Rooms package: Assign unit to vacational package",
     "PLUGIN" : "reaction rule",
@@ -114,7 +136,8 @@ function rooms_package_default_rules_configuration() {
       }
     ],
     "DO" : [
-      { "rooms_package_assign_unit_id" : { "commerce_line_item" : [ "commerce_line_item" ] } }
+      { "rooms_package_assign_unit_id" : { "commerce_line_item" : [ "commerce_line_item" ] } },
+      { "redirect" : { "url" : "cart" } }
     ]
   }}';
 
