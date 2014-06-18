@@ -120,6 +120,7 @@ function rooms_package_check_availability($product) {
  *   The line item to assign the unit.
  */
 function rooms_package_assign_unit_id($line_item) {
+  dpm('hi');
   $product_id = current(field_get_items('commerce_line_item', $line_item, 'commerce_product'));
   $product = commerce_product_load($product_id['product_id']);
   $dates = field_get_items('commerce_product', $product, 'rooms_package_dates');
@@ -141,4 +142,5 @@ function rooms_package_assign_unit_id($line_item) {
     '@unit' => $unit->name,
   ));
   commerce_line_item_save($line_item);
+  dpm($line_item);
 }
