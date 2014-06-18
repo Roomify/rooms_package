@@ -12,8 +12,8 @@ function rooms_package_commerce_product_type_info() {
   return array(
     'rooms_package' => array(
       'type' => 'rooms_package',
-      'name' => t('Rooms package'),
-      'description' => t('Vacational packages provided by Rooms.'),
+      'name' => t('Rooms Packages'),
+      'description' => t('Provides support for creating package solutions for Rooms.'),
       'revision' => '1',
     ),
   );
