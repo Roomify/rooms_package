@@ -196,7 +196,8 @@ function rooms_package_create_reference_fields() {
     $instance = array(
       'entity_type' => 'commerce_product',
       'field_name' => 'rooms_package_all_units',
-      'label' => 'Apply to all units',
+      'label' => 'All units',
+      'description' => 'This option allow to select all the bookable units and override any other option.',
       'bundle' => 'rooms_package',
       'required' => 0,
       'widget' => array(
@@ -216,7 +217,8 @@ function rooms_package_create_reference_fields() {
     $instance = array(
       'entity_type' => 'commerce_product',
       'field_name' => 'rooms_package_unit_types',
-      'label' => 'Room unit types',
+      'label' => 'Specific types',
+      'description' => 'This option allows to include all the bookable units of certain type in the package.',
       'bundle' => 'rooms_package',
       'required' => 0,
       'widget' => array(
@@ -235,6 +237,7 @@ function rooms_package_create_reference_fields() {
       'entity_type' => 'commerce_product',
       'field_name' => 'rooms_package_units',
       'label' => 'Room units',
+      'description' => 'Select individual units available to include in the package.',
       'bundle' => 'rooms_package',
       'required' => 0,
       'widget' => array(
@@ -282,7 +285,7 @@ function rooms_package_create_content_type() {
  * @param $type
  *   A node type object.
  *
- * @return
+ * @return array
  *   Product field instance.
  */
 function rooms_package_add_product_field($type) {

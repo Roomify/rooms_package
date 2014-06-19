@@ -12,9 +12,18 @@ function rooms_package_commerce_product_type_info() {
   return array(
     'rooms_package' => array(
       'type' => 'rooms_package',
-      'name' => t('Rooms Packages'),
+      'name' => t('Rooms Package'),
       'description' => t('Provides support for creating package solutions for Rooms.'),
       'revision' => '1',
     ),
   );
+}
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function rooms_package_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "field_group" && $api == "field_group") {
+    return array("version" => "1");
+  }
 }

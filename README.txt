@@ -13,8 +13,8 @@ Rooms that is commerce_stock).
 CONFIGURATION
 -------------
 The module creates a new Product Type called "Rooms Packages" and a content type
-to display that Product Type called "Rooms package". The module Commerce Stock is
-used to help with availability check before the package is added to the cart.
+to display that Product Type called "Rooms package". The module Commerce Stock
+is used to help with availability check before the package is added to the cart.
 
 In order to create a package first create a product selecting the dates and the
 specific units that can participate in the package.
@@ -30,4 +30,8 @@ FURTHER NOTES
 -------------
 This is really just a first step into how we can handle packages. Further ideas
 and feature requests welcomed.
+
+To provide a better UX, is encouraged the use of the module Field Group
+(https://www.drupal.org/project/field_group), although it is not an explicit
+dependency.
 
