@@ -1,6 +1,6 @@
 INTRODUCTION
 ------------
-This module add functionality to the Rooms package
+This module adds functionality to the Rooms package
 (drupal.org/project/rooms) that allow users to create packages. The definition
 of package in this specific case is a pre-defined price for a Room over a
 pre-defined period of time.
