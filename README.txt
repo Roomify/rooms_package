@@ -10,6 +10,12 @@ INSTALLATION
 Simply download and activate the module and any listed dependencies (beyond
 Rooms that is commerce_stock).
 
+Rooms Package requires:
+
+rooms_booking_manager (>=1.3)
+commerce_stock
+entityreference
+
 CONFIGURATION
 -------------
 The module creates a new Product Type called "Rooms Packages" and a content type
