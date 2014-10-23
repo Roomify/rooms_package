@@ -6,3 +6,4 @@ package = Rooms
 
 dependencies[] = commerce_stock
 dependencies[] = entityreference
+dependencies[] = rooms_booking_manager
